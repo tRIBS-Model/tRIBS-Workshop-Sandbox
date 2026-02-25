@@ -9,9 +9,8 @@ RUN apt-get update && apt-get install -y \
     git \
     && rm -rf /var/lib/apt/lists/*
 
-# ------------------------------------------------------------------
-# BUILD tRIBS
-# ------------------------------------------------------------------
+
+    # BUILD tRIBS
 WORKDIR /opt
 
 # Clone the repository
@@ -27,9 +26,8 @@ RUN cmake -S . -B build -Dparallel=OFF -DCMAKE_CXX_FLAGS="-O2" \
 # Add the tRIBS executable to the System PATH
 ENV PATH="/opt/tRIBS/build:/opt/tRIBS/build/src:${PATH}"
 
-# ------------------------------------------------------------------
+
 # INSTALL pytRIBS
-# ------------------------------------------------------------------
 WORKDIR /opt
 
 # Clone pytRIBS
@@ -40,6 +38,8 @@ WORKDIR /opt/pytRIBS
 # Install it using pip
 # Use "--no-cache-dir" to keep the image small
 RUN pip install --no-cache-dir .
+# Additional package needed for reading in observed data form excel file
+RUN pip install --no-cache-dir openpyxl 
 
 # Set the user back to the workspace directory
 WORKDIR /workspaces
