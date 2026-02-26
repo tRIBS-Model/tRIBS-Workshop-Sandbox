@@ -38,8 +38,9 @@ WORKDIR /opt/pytRIBS
 # Install it using pip
 # Use "--no-cache-dir" to keep the image small
 RUN pip install --no-cache-dir .
-# Additional package needed for reading in observed data form excel file
-RUN pip install --no-cache-dir openpyxl 
+# Additional packages: openpyxl for reading Excel files and explicitly install Whitebox toolbox
+RUN pip install --no-cache-dir openpyxl whitebox \
+    && python3 -c "import whitebox; whitebox.download_wbt(linux=True, verbose=True)"
 
 # Set the user back to the workspace directory
 WORKDIR /workspaces
