@@ -31,7 +31,7 @@ ENV PATH="/opt/tRIBS/build:/opt/tRIBS/build/src:${PATH}"
 WORKDIR /opt
 
 # Clone pytRIBS
-RUN git clone https://github.com/tRIBS-Model/pytRIBS.git
+RUN git clone -b test_WBT_fix https://github.com/tRIBS-Model/pytRIBS.git
 
 WORKDIR /opt/pytRIBS
 
