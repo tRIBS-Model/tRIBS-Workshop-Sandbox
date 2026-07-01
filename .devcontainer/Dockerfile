@@ -31,15 +31,16 @@ ENV PATH="/opt/tRIBS/build:/opt/tRIBS/build/src:${PATH}"
 WORKDIR /opt
 
 # Clone pytRIBS
-RUN git clone https://github.com/tRIBS-Model/pytRIBS.git
+RUN git clone -b test_WBT_fix https://github.com/tRIBS-Model/pytRIBS.git
 
 WORKDIR /opt/pytRIBS
 
 # Install it using pip
 # Use "--no-cache-dir" to keep the image small
 RUN pip install --no-cache-dir .
-# Additional package needed for reading in observed data form excel file
-RUN pip install --no-cache-dir openpyxl 
+# Additional packages: openpyxl for reading Excel files and explicitly install Whitebox toolbox
+RUN pip install --no-cache-dir openpyxl whitebox \
+    && python3 -c "import whitebox; whitebox.download_wbt(verbose=True)"
 
 # Set the user back to the workspace directory
 WORKDIR /workspaces
