@@ -4,6 +4,6 @@ __pycache__/
 .ipynb_checkpoints/
 .env
 venv/
-/workspaces/SMF_pytRIBS/smf_demo/data/*
-/workspaces/SMF_pytRIBS/smf_demo/results/*
-/workspaces/SMF_pytRIBS/smf_demo/*.in
+/workspaces/SMF/lab/data/*
+/workspaces/SMF/lab/results/*
+/workspaces/SMF/lab/*.in

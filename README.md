@@ -24,7 +24,13 @@ In your new repository, click the green **"<> Code"** button, select the **"Code
 <img src="docs/images/create_codespace.png" width="600" alt="Create Codespace">
 
 ### 4. Open the Notebook
-Once the environment loads (this may take 4-5 minutes the first time), open the `workspaces/` folder and click on the workshop notebook (e.g., `pytRIBS_SMF.ipynb`). Once the Jupyter Notebook is opened the Codespace will recognize that you want to use Jupyter and will download some additional files to the Codespace. The Codespace is an in-browser version of Microsoft's VScode that can be used to run the example notebook to setup and run the tRIBS model for the South Mountain Fan Watershed.
+Once the environment loads (this may take 4-5 minutes the first time), open the `workspaces/SMF/lab/` folder and click on `Make_SMF_Model.ipynb` to get started. Once the Jupyter Notebook is opened the Codespace will recognize that you want to use Jupyter and will download some additional files to the Codespace. The Codespace is an in-browser version of Microsoft's VScode that can be used to run the example notebook to setup and run the tRIBS model for the South Mountain Fan Watershed.
+
+The notebooks are meant to be run in order:
+1.  **`Make_SMF_Model.ipynb`:** build and configure the tRIBS model.
+2.  **`Run_Model.ipynb`:** run the model and visualize the results.
+
+`Generate_Met_Forcing.ipynb` is optional — only run it if you want to change the simulation's time window; the default forcing data is already provided.
 
 ---
 
