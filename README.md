@@ -29,6 +29,7 @@ Once the environment loads (this may take 4-5 minutes the first time), open the 
 The notebooks are meant to be run in order:
 1.  **`Make_SMF_Model.ipynb`:** build and configure the tRIBS model.
 2.  **`Run_Model.ipynb`:** run the model and visualize the results.
+3.  **`Run_FreqStorm_Model.ipynb`:** run the calibrated model against a synthetic 100-year design storm and compare it to the calibration event.
 
 `Generate_Met_Forcing.ipynb` is optional — only run it if you want to change the simulation's time window; the default forcing data is already provided.
 
