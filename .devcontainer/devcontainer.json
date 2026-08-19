@@ -1,8 +1,10 @@
 {
   "name": "tRIBS Class Sandbox",
-  "build": {
-    "dockerfile": "Dockerfile"
-  },
+  // Prebuilt by .github/workflows/build-devcontainer-image.yml from
+  // ./Dockerfile, which remains the source of truth. Creating a codespace is a
+  // pull, not a build, edits to Dockerfile take effect only once that
+  // workflow republishes the image. On main this should read ":latest".
+  "image": "ghcr.io/tribs-model/tribs-workshop-sandbox:dev",
   "customizations": {
     "vscode": {
       "extensions": [
