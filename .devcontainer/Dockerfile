@@ -13,8 +13,8 @@ RUN apt-get update && apt-get install -y \
     # BUILD tRIBS
 WORKDIR /opt
 
-# Clone the repository
-RUN git clone https://github.com/tRIBS-Model/tRIBS.git
+# Clone the repository (dev branch: v6.0.0 changes under test)
+RUN git clone -b dev https://github.com/tRIBS-Model/tRIBS.git
 
 WORKDIR /opt/tRIBS
 
@@ -30,8 +30,8 @@ ENV PATH="/opt/tRIBS/build:/opt/tRIBS/build/src:${PATH}"
 # INSTALL pytRIBS
 WORKDIR /opt
 
-# Clone pytRIBS
-RUN git clone -b main https://github.com/tRIBS-Model/pytRIBS.git
+# Clone pytRIBS (dev branch: v6.0.0 changes under test)
+RUN git clone -b dev https://github.com/tRIBS-Model/pytRIBS.git
 
 WORKDIR /opt/pytRIBS
 
