@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /opt
 
 # Clone the repository (dev branch: v6.0.0 changes under test)
-RUN git clone -b dev https://github.com/tRIBS-Model/tRIBS.git
+RUN git clone -b testcodespace https://github.com/tRIBS-Model/tRIBS.git
 
 WORKDIR /opt/tRIBS
 
