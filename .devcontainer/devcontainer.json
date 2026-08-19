@@ -8,7 +8,18 @@
       "extensions": [
         "ms-python.python",
         "ms-toolsai.jupyter"
-      ]
+      ],
+      "settings": {
+        // The image's Python, where pytRIBS and ipykernel are installed.
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        // The Jupyter extension only auto-selects a kernel when a single
+        // interpreter is a candidate. Exclude Debian's system Python.
+        "jupyter.kernels.excludePythonEnvironments": [
+          "/usr/bin/python3",
+          "/usr/bin/python3.13",
+          "/bin/python3"
+        ]
+      }
     }
   }
 }
