@@ -20,7 +20,7 @@ WORKDIR /opt/tRIBS
 
 # Run your specific CMake commands
 # We configure it for serial execution (parallel=OFF) and optimization (-O2)
-RUN cmake -S . -B build -Dparallel=OFF -DCMAKE_CXX_FLAGS="-O2" \
+RUN cmake -S . -B build -Dparallel=OFF -DCMAKE_BUILD_TYPE=Release \
     && cmake --build build --target all
 
 # Add the tRIBS executable to the System PATH
