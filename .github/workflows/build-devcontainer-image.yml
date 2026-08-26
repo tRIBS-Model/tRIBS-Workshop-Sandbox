@@ -7,7 +7,10 @@ on:
   push:
     branches: [main, dev]
     paths:
-      - '.devcontainer/Dockerfile'
+      # Deliberately the whole directory, not just Dockerfile: a merge that
+      # only edits devcontainer.json must still trigger a build, or the tag it
+      # references may not exist yet and codespaces fall into recovery mode.
+      - '.devcontainer/**'
       - '.github/workflows/build-devcontainer-image.yml'
   # Scheduled runs only ever fire on the default branch (main). Keeps the
   # published image current as the tRIBS/pytRIBS dev branches move.
