@@ -13,13 +13,7 @@ RUN apt-get update && apt-get install -y \
     # BUILD tRIBS
 WORKDIR /opt
 
-# tRIBS is pinned by tag, and tags move. Docker keys a RUN layer on its own
-# text plus its parent, so moving the tag upstream is completely invisible to
-# the cache: the clone below would be restored from cache with the old source
-# and the build would go green having changed nothing. This ADD fetches the
-# tag's current SHA; the response body changes when the tag moves, which busts
-# this layer and every layer after it. Do not remove it or rebuilds silently
-# stop picking up upstream fixes.
+# tRIBS is pinned by tag, so rebuild if tags move
 ARG TRIBS_REF=v6.0.0
 ADD https://api.github.com/repos/tRIBS-Model/tRIBS/git/refs/tags/${TRIBS_REF} /tmp/tribs-ref.json
 
