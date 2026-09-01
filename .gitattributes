@@ -1,0 +1,3 @@
+# Notebooks are normalized on the way into git by tools/clean_notebook.py.
+# Enable once per clone: bash tools/setup-git-filters.sh
+*.ipynb filter=nbclean
