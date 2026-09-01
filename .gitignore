@@ -7,3 +7,4 @@ venv/
 /workspaces/SMF/lab/data/*
 /workspaces/SMF/lab/results/*
 /workspaces/SMF/lab/*.in
+/workspaces/SMF/lab/*.log
