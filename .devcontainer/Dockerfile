@@ -13,8 +13,18 @@ RUN apt-get update && apt-get install -y \
     # BUILD tRIBS
 WORKDIR /opt
 
+# tRIBS is pinned by tag, and tags move. Docker keys a RUN layer on its own
+# text plus its parent, so moving the tag upstream is completely invisible to
+# the cache: the clone below would be restored from cache with the old source
+# and the build would go green having changed nothing. This ADD fetches the
+# tag's current SHA; the response body changes when the tag moves, which busts
+# this layer and every layer after it. Do not remove it or rebuilds silently
+# stop picking up upstream fixes.
+ARG TRIBS_REF=v6.0.0
+ADD https://api.github.com/repos/tRIBS-Model/tRIBS/git/refs/tags/${TRIBS_REF} /tmp/tribs-ref.json
+
 # Clone the repository
-RUN git clone -b v6.0.0 https://github.com/tRIBS-Model/tRIBS.git
+RUN git clone -b ${TRIBS_REF} https://github.com/tRIBS-Model/tRIBS.git
 
 WORKDIR /opt/tRIBS
 
@@ -30,8 +40,12 @@ ENV PATH="/opt/tRIBS/build:/opt/tRIBS/build/src:${PATH}"
 # INSTALL pytRIBS
 WORKDIR /opt
 
+# Same cache-busting reason as TRIBS_REF above.
+ARG PYTRIBS_REF=v1.0.0
+ADD https://api.github.com/repos/tRIBS-Model/pytRIBS/git/refs/tags/${PYTRIBS_REF} /tmp/pytribs-ref.json
+
 # Clone pytRIBS
-RUN git clone -b v1.0.0 https://github.com/tRIBS-Model/pytRIBS.git
+RUN git clone -b ${PYTRIBS_REF} https://github.com/tRIBS-Model/pytRIBS.git
 
 WORKDIR /opt/pytRIBS
 

@@ -17,6 +17,19 @@ on:
   schedule:
     - cron: '0 8 * * 1'
   workflow_dispatch:
+    inputs:
+      # Left blank on purpose. Blank means "use the ARG defaults baked into
+      # .devcontainer/Dockerfile", which keeps the pinned versions in exactly
+      # one place. Filling one in is for one-off builds: testing an upstream
+      # fix before tagging it, or rebuilding against a branch or commit SHA.
+      tribs_ref:
+        description: 'tRIBS ref (tag/branch/SHA). Blank = Dockerfile default. NOTE: publishes to :latest.'
+        required: false
+        default: ''
+      pytribs_ref:
+        description: 'pytRIBS ref (tag/branch/SHA). Blank = Dockerfile default. NOTE: publishes to :latest.'
+        required: false
+        default: ''
 
 jobs:
   build:
@@ -56,5 +69,12 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          # Each line collapses to empty unless its dispatch input was filled
+          # in, and build-push-action drops empty entries. So push/schedule
+          # runs pass no build-args at all and the Dockerfile ARG defaults
+          # stand -- never pass an empty value, that would clone ref "".
+          build-args: |
+            ${{ github.event.inputs.tribs_ref && format('TRIBS_REF={0}', github.event.inputs.tribs_ref) || '' }}
+            ${{ github.event.inputs.pytribs_ref && format('PYTRIBS_REF={0}', github.event.inputs.pytribs_ref) || '' }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
